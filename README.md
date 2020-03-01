@@ -1,6 +1,6 @@
 # Rapport du projet IOT « Station Météo »
 
-1. Choix technologiques
+__1. Choix technologiques__
 
 __Introduction__
 
@@ -34,7 +34,7 @@ __Schéma électronique__
 
 [schema_elec]: https://github.com/sadek-maghzili/IoT/blob/master/Image/Sch%C3%A9ma%20%C3%A9lectronique.png "Schéma électronique"
 
-2. How to...
+__2. How to...__
 
 Après avoir récupérer le l'Id du module sigfox pour configurer le callback et avoir fait tous les branchements électriques
 comme indiqué plus haut, il faut :
@@ -213,7 +213,7 @@ Nous obtenons comme résultat :
 [résultat]: https://github.com/sadek-maghzili/IoT/blob/master/Image/Resultat.png "résultat"
 
 
-3. Usages potentiels
+__3. Usages potentiels__
 
 Cette technologie à de nombreux usages potentiels, à grande échelle comme à petite échelle. Tout 
 d’abord à __grande échelle__ : 
