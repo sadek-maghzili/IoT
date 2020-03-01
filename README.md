@@ -26,13 +26,13 @@ __Schéma de la solution__
 
 ![alt text][schema_sol]
 
-[schema_sol]: https://github.com/sadek-maghzili/IoT/blob/master/Schema%20solution.png "Schéma de la solution"
+[schema_sol]: https://github.com/sadek-maghzili/IoT/blob/master/Image/Schema%20solution.png "Schéma de la solution"
 
 __Schéma électronique__
 
 ![alt text][schema_elec]
 
-[schema_elec]: https://github.com/sadek-maghzili/IoT/blob/master/Sch%C3%A9ma%20%C3%A9lectronique.png "Schéma électronique"
+[schema_elec]: https://github.com/sadek-maghzili/IoT/blob/master/Image/Sch%C3%A9ma%20%C3%A9lectronique.png "Schéma électronique"
 
 2. How to...
 
@@ -190,14 +190,33 @@ String sendMessage(uint8_t sigfoxMsg[], int bufferSize)
   return status;
 }
 ```
-Ce code enverra la température, l'humidité et la luminosité toutes les 10 minutes.
+Ce code enverra la température, l'humidité et la luminosité toutes les 10 minutes par l'intermédiare de Sigfox.
+Il faut à présent récupérer ces données sur un serveur, pour cela on utilisera ngrok. Après avoir télécharger ngrok,
+on lance la commande suivante dans un terminal : ./ngrok http 5000 -region eu
+Cela permettra de créer un serveur local pour récupérer les données, il suffira de configurer le
+_callback_ de sigfox directement sur leur site à l'adresse : https://backend.sigfox.com/devicetype/list
+en choisissant le bon module grâce à son ID : 
+
+![alt text][callback]
+
+[callback]: https://github.com/sadek-maghzili/IoT/blob/master/Image/callback.png "callback"
+
+On copie l'adresse donné par ngrok. Nous allons ensuite dans le dossier Flask pour lancer le serveur qui héberge
+notre "site" grâce à la commande suivante : python Server.py et en s'assurant que les dossiers templates et static 
+sont bien présents.
+
+Pour visualiser les données, il reste à ouvrir le navigateur internet et aller à l'adresse http://localhost:5000/IoT
+Nous obtenons comme résultat :
+
+![alt text][résultat]
+
+[résultat]: https://github.com/sadek-maghzili/IoT/blob/master/Image/callback.png "résultat"
 
 
 3. Usages potentiels
 
 Cette technologie à de nombreux usages potentiels, à grande échelle comme à petite échelle. Tout 
-d’abord à __grande échelle__ :
-
+d’abord à __grande échelle__ : 
 Les agriculteurs de demain aurons accès un flux de donnée régulier sur l’état de leur produit en 
 temps réel. L’étude des sols leur permettrons d’anticiper une mauvaise croissance ou quelconque 
 anomalie et de vite réagir face à une situation de façon très localisé. De ce fait, non seulement 
