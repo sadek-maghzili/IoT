@@ -210,7 +210,7 @@ Nous obtenons comme résultat :
 
 ![alt text][résultat]
 
-[résultat]: https://github.com/sadek-maghzili/IoT/blob/master/Image/Resultat.png "résultat"
+[résultat]: https://github.com/sadek-maghzili/IoT/blob/master/Image/Result.png "résultat"
 
 
 __3. Usages potentiels__
