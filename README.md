@@ -2,6 +2,8 @@
 
 1. Choix technologiques
 
+__Introduction__
+
 Dans le cadre du projet d'IoT, nous avions à réaliser une station météo connectée, nous avons 
 choisi de réaliser notre station pour l'agriculture. Notre station météorologique permet donc 
 de renseigner des données spécifiques à l’environnement d’un champ de tomate tel que l’humidité 
@@ -37,7 +39,7 @@ __Schéma électronique__
 3. Usages potentiels
 
 Cette technologie à de nombreux usages potentiels, à grande échelle comme à petite échelle. Tout 
-d’abord à grande échelle :
+d’abord à __grande échelle__ :
 
 Les agriculteurs de demain aurons accès un flux de donnée régulier sur l’état de leur produit en 
 temps réel. L’étude des sols leur permettrons d’anticiper une mauvaise croissance ou quelconque 
@@ -45,7 +47,7 @@ anomalie et de vite réagir face à une situation de façon très localisé. De 
 ce contrôle réduit les pertes et par conséquent le gâchis mais permet de fructifier considérablement 
 sa production.
 
-A présent à petite échelle :
+A présent à __petite échelle__ :
 Dans une société visant à manger mieux avec des produits de meilleure qualité, être plus éco-responsable 
 et moins dépendant des produits de grande surface dont la provenance et leur surproduction sont des problèmes. 
 Notre système d’alertes permettrait à des personnes sans connaissances agricoles particulières de faire pousser 
