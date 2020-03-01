@@ -6,9 +6,10 @@ __Introduction__
 
 Dans le cadre du projet d'IoT, nous avions à réaliser une station météo connectée, nous avons 
 choisi de réaliser notre station pour l'agriculture. Notre station météorologique permet donc 
-de renseigner des données spécifiques à l’environnement d’un champ de tomate tel que l’humidité 
-du sol, la luminosité ou encore la température extérieure. Cela permettra aux professionnels 
-de l’agro-alimentaire d’améliorer leur rendement, gagner du temps et donc de la productivité.
+de renseigner des données spécifiques à l’environnement d’un champ de tomate (plante qui a besoin 
+de beacoup de soleil, d'eau et de lumière) tel que l’humidité du sol, la luminosité ou encore la 
+température extérieure. Cela permettra aux professionnels de l’agro-alimentaire d’améliorer leur 
+rendement, gagner du temps et donc de la productivité.
 
 Notre technologie d’IoT (Internet Of Things) doit être capable de récolter des informations
 sur son environnement à l'aide de ses capteurs et les transmettre de manière autonome et sans
