@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='IoT.css') }}">
+    <title>{{ "Tomato Farm Fresh" }}</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+</head>
+
+<body>
+    <div id='d1'>
+        <img id="logo" src="{{ url_for('static', filename='logo.png') }}" alt="tomate logo">
+    </div>
+
+    <div id='d2'>
+        {{ "Données météo" }}</h1>
+    </div>
+
+    <div id='d3'>
+        <p id="ville"></p>
+        <p id="jour"></p>
+        <p id="heure"></p>
+        <p id="description"></p>
+        <img id="wicon" src="" alt="Weather icon">
+        <p id="meteoTemperature"></p>
+        <p id="meteoSunRise"></p>
+        <p id="meteoSunSet"></p>
+        <p id="meteoHumidité"></p>
+        <p id="meteoVent"></p>
+        <p id="meteoPression"></p>
+    </div>
+    <script>
+        document.getElementById("ville").innerHTML = "{{ ville }}";
+        document.getElementById("jour").innerHTML = "{{ jour }}";
+        document.getElementById("heure").innerHTML = "{{ heure }}";
+        document.getElementById("description").innerHTML = "{{ description }}";
+        var iconcode = "{{ icon }}"
+        var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+        document.images["wicon"].src = iconurl;
+        document.getElementById("meteoTemperature").innerHTML = Math.round({{ meteoTemperature }}) + "°C";
+        document.getElementById("meteoSunRise").innerHTML = "Lever du soleil : " + "{{ meteoSunRise }}";
+        document.getElementById("meteoSunSet").innerHTML = "Coucher du soleil : " + "{{ meteoSunSet }}";
+        document.getElementById("meteoHumidité").innerHTML = "Humidité : " + {{ meteoHumidite }} + "%";
+        document.getElementById("meteoVent").innerHTML = "Vent : " + {{ meteoVent }} + " km/h";
+        document.getElementById("meteoPression").innerHTML = "Pression : " + {{ meteoPression }} + " hPa";
+    </script>
+
+    <div id='d4'>
+        {{ "Données capteurs" }}</h1>
+    </div>
+
+    <div id='d5' style="position:absolute; top:500px; left:50px; z-index:3">
+        <h1>{{ "Température" }} (°C) </h1>
+        <canvas id="chart" width="600" height="400"></canvas>
+    </div>
+    <script>
+
+        // bar chart data
+        var barData = {
+            labels: [
+                {% for item in heures %}
+        "{{ item }}",
+            {% endfor %}
+                    ],
+
+        datasets: [{
+            fillColor: "rgba(0,187,205,0.2)",
+            strokeColor: "rgba(0,187,205,1)",
+            pointColor: "rgba(0,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            bezierCurve: false,
+
+            data: [
+                {% for item in temperatures %}
+              {{ item }},
+        {% endfor %}]
+                  }]
+              }
+
+        annotation: {
+            annotations: [{
+                type: 'line',
+                mode: 'horizontal',
+                scaleID: 'y-axis-0',
+                value: 5,
+                borderColor: 'rgb(75, 192, 192)',
+                borderWidth: 4,
+                label: {
+                    enabled: false,
+                    content: 'Test label'
+                }
+            }]
+        }
+
+        Chart.defaults.global.animationSteps = 50;
+        Chart.defaults.global.tooltipYPadding = 16;
+        Chart.defaults.global.tooltipCornerRadius = 0;
+        Chart.defaults.global.tooltipTitleFontStyle = "normal";
+        Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+        Chart.defaults.global.animationEasing = "easeOutBounce";
+        Chart.defaults.global.responsive = false;
+        Chart.defaults.global.scaleLineColor = "black";
+        Chart.defaults.global.scaleFontSize = 16;
+
+        // get bar chart canvas
+        var mychart = document.getElementById("chart").getContext("2d");
+
+        steps = 10
+        max = {{ max }}
+        // draw bar chart
+        var LineChartDemo = new Chart(mychart).Line(barData, {
+            scaleOverride: true,
+            scaleSteps: steps,
+            scaleStepWidth: Math.ceil(max / steps),
+            scaleStartValue: 0,
+            scaleShowVerticalLines: true,
+            scaleShowGridLines: true,
+            barShowStroke: true,
+            scaleShowLabels: true,
+            bezierCurve: false,
+        });
+
+    </script>
+
+    <div id='d6' style="position:absolute; top:500px; left:750px; z-index:3">
+        <h1>{{ "Humidité du sol" }} (%)</h1>
+        <canvas id="chart_hum" width="600" height="400"></canvas>
+    </div>
+    <script>
+
+        // bar chart data
+        var barData = {
+            labels: [
+                {% for item in heures %}
+        "{{ item }}",
+            {% endfor %}
+        ],
+
+        datasets: [{
+            fillColor: "rgba(0,187,205,0.2)",
+            strokeColor: "rgba(0,187,205,1)",
+            pointColor: "rgba(0,187,205,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            bezierCurve: false,
+            data: [
+                {% for item in humidites %}
+          {{ item }},
+        {% endfor %}]
+      }
+]
+  }
+
+        Chart.defaults.global.animationSteps = 50;
+        Chart.defaults.global.tooltipYPadding = 16;
+        Chart.defaults.global.tooltipCornerRadius = 0;
+        Chart.defaults.global.tooltipTitleFontStyle = "normal";
+        Chart.defaults.global.tooltipFillColor = "rgba(0,0,0,0.8)";
+        Chart.defaults.global.animationEasing = "easeOutBounce";
+        Chart.defaults.global.responsive = false;
+        Chart.defaults.global.scaleLineColor = "black";
+        Chart.defaults.global.scaleFontSize = 16;
+
+        // get bar chart canvas
+        var mychart_2 = document.getElementById("chart_hum").getContext("2d");
+
+        steps = 10
+        max = {{ 100 }}
+        // draw bar chart
+        var LineChartDemo = new Chart(mychart_2).Line(barData, {
+            scaleOverride: true,
+            scaleSteps: steps,
+            scaleStepWidth: Math.ceil(max / steps),
+            scaleStartValue: 0,
+            scaleShowVerticalLines: true,
+            scaleShowGridLines: true,
+            barShowStroke: true,
+            scaleShowLabels: true,
+            bezierCurve: false,
+        });
+
+    </script>
+
+    <div id='d7' style="position:absolute; top:500px; left:1450px; z-index:3">
+        <h1>{{ "Luminosité" }}</h1>
+        <canvas id="cvs"></canvas>
+    </div>
+    <script>
+        var canvas = document.getElementById("cvs");
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        var ctx = canvas.getContext("2d");
+
+        var percent = {{ luminosite }};
+
+        ctx.beginPath();
+        ctx.arc(innerWidth / 2, innerHeight / 2, 100, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(130,187,205,0.2)";
+        ctx.lineWidth = 20;
+        ctx.stroke();
+        ctx.closePath();
+
+        var angle = percent / 100 * 360;
+        ctx.beginPath();
+        ctx.arc(innerWidth / 2, innerHeight / 2, 100, -90 * Math.PI / 180, (angle - 90) * Math.PI / 180);
+        ctx.strokeStyle = "rgba(0,187,255,0.2)";
+        ctx.lineWidth = 20;
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.font = "40px BlinkMacSystemFont";
+        ctx.fillStyle = "rgba(0,187,255,0.2)"
+        ctx.fillText(percent + "%", innerWidth / 2, innerHeight / 2);
+    </script>
+</body>
+
+</html>
