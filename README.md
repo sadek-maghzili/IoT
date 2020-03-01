@@ -18,7 +18,7 @@ nécessaires en fonction du système que l’on souhaite concevoir.
 
 Dans notre cas, nous avons opté pour un module Sigfox pour faire la liaison entre les capteurs et 
 le serveur. En effet, les messages Sigfox sont limités en taille (12 bytes au maximum) toutes les 
-10 minutes et nombre (140 par jour), ce qui est amplement suffisant pour des relevés de température 
+10 minutes et en nombre (140 par jour), ce qui est amplement suffisant pour des relevés de température 
 et d'humidité. De plus, cela permet d'être plus efficace que le WiFi dans les zones de campagnes les 
 plus reculé.
 
@@ -210,7 +210,7 @@ Nous obtenons comme résultat :
 
 ![alt text][résultat]
 
-[résultat]: https://github.com/sadek-maghzili/IoT/blob/master/Image/callback.png "résultat"
+[résultat]: https://github.com/sadek-maghzili/IoT/blob/master/Image/Resultat.png "résultat"
 
 
 3. Usages potentiels
