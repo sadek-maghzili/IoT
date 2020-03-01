@@ -22,6 +22,12 @@ luminosites = [
 
 heure = 0
 
+seuilTemperature = 15
+seuilHumidite = 50
+seuilLuminosite = 80
+i = 0
+j = 0
+
 
 def formatHeure(h, heur):
     if h.tm_hour < 10:
@@ -123,7 +129,10 @@ def line():
     meteoPression = jsonMeteo.get("main").get("pressure")
     meteoHumidite = jsonMeteo.get("main").get("humidity")
     meteoVent = jsonMeteo.get("wind").get("speed")
-    return render_template('Iot.html', ville=ville, description=description, jour=jour, heure=heure, icon=icon, meteoTemperature=meteoTemperature, meteoSunRise=meteoSunRise, meteoSunSet=meteoSunSet, meteoPression=meteoPression, meteoHumidite=meteoHumidite, meteoVent=meteoVent, title='Plant de tomate', max=50, heures=heures, temperatures=temperatures, humidites=humidites, luminosite=luminosites)
+
+    i = len(temperatures) - 1
+    j = len(humidites) - 1
+    return render_template('Iot.html', ville=ville, description=description, jour=jour, heure=heure, icon=icon, meteoTemperature=meteoTemperature, meteoSunRise=meteoSunRise, meteoSunSet=meteoSunSet, meteoPression=meteoPression, meteoHumidite=meteoHumidite, meteoVent=meteoVent, title='Plant de tomate', max=50, heures=heures, temperatures=temperatures, humidites=humidites, luminosite=luminosites, seuilTemperature=seuilTemperature, i=i, seuilHumidite=seuilHumidite, j=j, seuilLuminosite=seuilLuminosite)
 
 
 if __name__ == '__main__':

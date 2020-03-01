@@ -53,8 +53,37 @@
     <div id='d5' style="position:absolute; top:500px; left:50px; z-index:3">
         <h1>{{ "Température" }} (°C) </h1>
         <canvas id="chart" width="600" height="400"></canvas>
+        <canvas id="seuilTemperature"></canvas>
     </div>
     <script>
+        var seuilTemperature = {{ seuilTemperature }};
+        var i = {{ i }};
+        var canvas = document.getElementById("seuilTemperature");
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        var ctx = canvas.getContext("2d");
+
+        ctx.beginPath();
+        ctx.arc(50, 25, 20, 0, 2 * Math.PI, false);
+        if ({{ temperatures[i] }} > seuilTemperature) {
+            ctx.fillStyle = "green";
+        }
+        else if ({{ temperatures[i] }} > seuilTemperature * .80 && {{ temperatures[i] }} < seuilTemperature)
+            {
+            ctx.fillStyle = "orange";
+        }
+            else
+            {
+            ctx.fillStyle = "red";
+        }
+            ctx.fill();
+        ctx.closePath();
+
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.font = "30px BlinkMacSystemFont";
+        ctx.fillStyle = "rgba(0,0,0,1)"
+        ctx.fillText("seuil : " + seuilTemperature + "°C", 150, 25);
 
         // bar chart data
         var barData = {
@@ -128,8 +157,37 @@
     <div id='d6' style="position:absolute; top:500px; left:750px; z-index:3">
         <h1>{{ "Humidité du sol" }} (%)</h1>
         <canvas id="chart_hum" width="600" height="400"></canvas>
+        <canvas id="seuilHumidite"></canvas>
     </div>
     <script>
+        var seuilHumidite = {{ seuilHumidite }};
+        var j = {{ j }};
+        var canvas = document.getElementById("seuilHumidite");
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+        var ctx = canvas.getContext("2d");
+
+        ctx.beginPath();
+        ctx.arc(50, 25, 20, 0, 2 * Math.PI, false);
+        if ({{ humidites[j] }} > seuilHumidite) {
+            ctx.fillStyle = "green";
+        }
+        else if ({{ humidites[j] }} > seuilHumidite * .80 && {{ humidites[j] }} < seuilHumidite)
+            {
+            ctx.fillStyle = "orange";
+        }
+            else
+            {
+            ctx.fillStyle = "red";
+        }
+            ctx.fill();
+        ctx.closePath();
+
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.font = "30px BlinkMacSystemFont";
+        ctx.fillStyle = "rgba(0,0,0,1)"
+        ctx.fillText("seuil : " + seuilHumidite + "%", 150, 25);
 
         // bar chart data
         var barData = {
@@ -188,17 +246,46 @@
     <div id='d7' style="position:absolute; top:500px; left:1450px; z-index:3">
         <h1>{{ "Luminosité" }}</h1>
         <canvas id="cvs"></canvas>
+        <canvas id="seuilLuminosite"></canvas>
     </div>
     <script>
+        var seuilLuminosite = {{ seuilLuminosite }};
+        var canvas = document.getElementById("seuilLuminosite");
+        var x = 250;
+        var y = 200;
+        var ctx = canvas.getContext("2d");
+
+        ctx.beginPath();
+        ctx.arc(50, 25, 20, 0, 2 * Math.PI, false);
+        if ({{ luminosite }} > seuilLuminosite) {
+            ctx.fillStyle = "green";
+        }
+        else if ({{ luminosite }} > seuilLuminosite * .80 && {{ luminosite }} < seuilLuminosite)
+            {
+            ctx.fillStyle = "orange";
+        }
+            else
+            {
+            ctx.fillStyle = "red";
+        }
+            ctx.fill();
+        ctx.closePath();
+
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.font = "30px BlinkMacSystemFont";
+        ctx.fillStyle = "rgba(0,0,0,1)"
+        ctx.fillText("seuil : " + seuilLuminosite + "%", 150, 25);
+
         var canvas = document.getElementById("cvs");
-        canvas.width = innerWidth;
-        canvas.height = innerHeight;
+        canvas.width = 600;
+        canvas.height = 400;
         var ctx = canvas.getContext("2d");
 
         var percent = {{ luminosite }};
 
-        ctx.beginPath();
-        ctx.arc(innerWidth / 2, innerHeight / 2, 100, 0, Math.PI * 2);
+        //ctx.beginPath();
+        ctx.arc(x, y, 100, 0, Math.PI * 2);
         ctx.strokeStyle = "rgba(130,187,205,0.2)";
         ctx.lineWidth = 20;
         ctx.stroke();
@@ -206,7 +293,7 @@
 
         var angle = percent / 100 * 360;
         ctx.beginPath();
-        ctx.arc(innerWidth / 2, innerHeight / 2, 100, -90 * Math.PI / 180, (angle - 90) * Math.PI / 180);
+        ctx.arc(x, y, 100, -90 * Math.PI / 180, (angle - 90) * Math.PI / 180);
         ctx.strokeStyle = "rgba(0,187,255,0.2)";
         ctx.lineWidth = 20;
         ctx.stroke();
@@ -216,7 +303,7 @@
         ctx.textAlign = "center";
         ctx.font = "40px BlinkMacSystemFont";
         ctx.fillStyle = "rgba(0,187,255,0.2)"
-        ctx.fillText(percent + "%", innerWidth / 2, innerHeight / 2);
+        ctx.fillText(percent + "%", x, y);
     </script>
 </body>
 
